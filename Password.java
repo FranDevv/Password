@@ -47,5 +47,5 @@ public class Password {
             return false;
         }
     }
-    /* contiunar.... */
+    /* contiunar.... falta getter y setter*/
 }
