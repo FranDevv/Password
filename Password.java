@@ -18,7 +18,7 @@ public class Password {
     // @param
     public Password(int longitud) {
         this.longitud = longitud;
-        pass = GenerarPass();
+        pass = GenerarPass(); //para que no se inicie en 'null'
     }
 
     // Constructor Default
@@ -54,6 +54,7 @@ public class Password {
         String contra = "";
         for (int i = 0; i < getLongitud(); i++) {
 
+            // este switch agrega carater por caracter dependiendo del numero de la key
             switch ((int) Math.floor(Math.random() * (3 - 1 + 1) + 1)) {
                 case 1:
                     contra += Mayus();
@@ -72,7 +73,7 @@ public class Password {
 
     // funciones para devolver cada caracter diferente y luego concatenarlos
 
-    /* Esta formula (num1 - num2) + num2 no incluye esos numeros */
+    /* Esta formula (num1 - num2) + num2 incluye los numeros */
     private char Mayus() {
         return (char) Math.floor(Math.random() * (90 - 65) + 65);
     }
