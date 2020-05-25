@@ -8,7 +8,7 @@
 
     Los métodos que implementa serán:
         esFuerte(): devuelve un booleano si es fuerte o no, para que sea fuerte debe tener mas de 2 mayúsculas, mas de 1 minúscula y mas de 5 números.
-        ---------Seguir desde aca (21/05)---------------
         generarPassword():  genera la contraseña del objeto con la longitud que tenga.
         Método get para contraseña y longitud.
         Método set para longitud.
+        ---Finalizado, falta revision---
