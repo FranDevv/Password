@@ -1,4 +1,3 @@
-import java.util.Random;
 
 /**
  * Password
@@ -8,8 +7,7 @@ import java.util.Random;
 public class Password {
 
     // Constantes
-    private final static int LONGITUD_DEF = 8;
-    private Random rnd = new Random();
+    private final static int LONGITUD_DEF = 10;
 
     // Atributos
     private int longitud;
@@ -20,7 +18,7 @@ public class Password {
     // @param
     public Password(int longitud) {
         this.longitud = longitud;
-        GenerarPass();
+        pass = GenerarPass();
     }
 
     // Constructor Default
@@ -30,45 +28,61 @@ public class Password {
 
     // Metodos
     public boolean EsFuerte(String pass) {
-        if (pass.isEmpty()) {
-            int conMayus = 0;
-            int conMinus = 0;
-            int conNum = 0;
+        int conMayus = 0;
+        int conMinus = 0;
+        int conNum = 0;
 
-            // voy char por char contando que es lo que contiene
-            for (int i = 0; i < pass.length(); i++) {
-                if (pass.charAt(i) >= 65 && pass.charAt(i) <= 90) {
-                    conMayus++;
-                } else if (pass.charAt(i) >= 97 && pass.charAt(i) <= 122) {
-                    conMinus++;
-                } else {
-                    conNum++;
-                }
+        // voy char por char contando que es lo que contiene
+        for (int i = 0; i < pass.length(); i++) {
+            if (pass.charAt(i) >= 65 && pass.charAt(i) <= 90) {
+                conMayus += 1;
+            } else if (pass.charAt(i) >= 97 && pass.charAt(i) <= 122) {
+                conMinus += 1;
+            } else {
+                conNum += 1;
             }
-            // Valido si es fuerte
-            if (conMayus >= 2 && conMinus >= 1 && conNum >= 5) {
-                return true;
-            }
+        }
+        // Valido si es fuerte
+        if (conMayus >= 2 && conMinus >= 1 && conNum >= 5) {
+            return true;
         }
         return false;
     }
+        
 
     public String GenerarPass() {
-
         String contra = "";
         for (int i = 0; i < getLongitud(); i++) {
 
-            if (i < 2) {
-                contra += rnd.nextInt(10);
-            } else {
-                // saco el valor int equivalente al alfabeto Ascii
-                // int minusAscii = (int) Math.floor(Math.random() * (122 - 97) + 97);
-                 int mayusAscii=(int)Math.floor(Math.random()*(90-65)+65);
-                contra += (char) mayusAscii; // char + String si se puede lol (logico)
+            switch ((int) Math.floor(Math.random() * (3 - 1 + 1) + 1)) {
+                case 1:
+                    contra += Mayus();
+                    break;
+
+                case 2:
+                    contra += Minus();
+                    break;
+                case 3:
+                    contra += Num();
+                    break;
             }
         }
-        pass = contra;
-        return pass;
+        return contra;
+    }
+
+    // funciones para devolver cada caracter diferente y luego concatenarlos
+
+    /* Esta formula (num1 - num2) + num2 no incluye esos numeros */
+    private char Mayus() {
+        return (char) Math.floor(Math.random() * (90 - 65) + 65);
+    }
+
+    private char Minus() {
+        return (char) Math.floor(Math.random() * (122 - 97) + 97);
+    }
+
+    private int Num() {
+        return (int) Math.floor(Math.random() * 10);
     }
 
     // Getters && Setters
